@@ -31,7 +31,15 @@ server.use(session({
     createTable: true,
     clearInterval: 1000 * 60 * 10, //stale sessions removed now & then
     tablename: 'sessions',
-  }) //store is like a constructor & takes own configuration object
+    sidfieldname: 'sid',
+  }),
+  cookie: {
+    maxAge: 1000 * 60 * 10, //have a cookie last 10 min
+    secure: false, //true:  won't send cookie over https, not over plain http
+    //for development we keep it false
+    http: true, //javaScript cannot read the cookie on 'true'
+    // sameSite: '', //none to enable 3rd party cookies only over https
+  } //store is like a constructor & takes own configuration object
 }))
 server.use(helmet())
 server.use(express.json())
