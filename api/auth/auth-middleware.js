@@ -39,7 +39,7 @@ const checkUsernameFree = async (req, res, next) => {
   }
 */
 const checkUsernameExists = async (req, res, next) => {
-  
+
 }
 
 /*
@@ -61,4 +61,8 @@ const checkPasswordLength = (req, res, next) => {
 // Don't forget to add these to the `exports` object so they can be required in other modules
 module.exports = {
   restricted,
+  checkUsernameFree,
+  checkUsernameExists,
+  checkPasswordLength,
+
 }
