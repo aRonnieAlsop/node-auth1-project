@@ -7,7 +7,8 @@
   }
 */
 const restricted = (req, res, next) => {
- next()
+  console.log('restricted')
+  next()
 }
 
 /*
