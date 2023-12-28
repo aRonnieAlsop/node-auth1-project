@@ -6,6 +6,9 @@
     "message": "You shall not pass!"
   }
 */
+
+const User = require('../users/users-model')
+
 const restricted = (req, res, next) => {
   console.log('restricted')
   next()
@@ -20,7 +23,13 @@ const restricted = (req, res, next) => {
   }
 */
 const checkUsernameFree = async (req, res, next) => {
-  next()
+  try {
+    const users = await User.findBy({ username: req.body.username })
+    if (!users.length) next()
+    else next({ 'message': 'Username taken' })
+  } catch (err) {
+    next(err) // need to have custom build middleware there or otherwise express will send to a default location
+  }
 }
 
 /*
