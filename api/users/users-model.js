@@ -19,7 +19,7 @@ const findBy = (filter) => {
  */
 const findById = (user_id) => {
     return db('users')
-      .where({ id })
+      .where('user_id', user_id)
       .first()
 }
 
