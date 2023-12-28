@@ -26,7 +26,7 @@ const checkUsernameFree = async (req, res, next) => {
   try {
     const users = await User.findBy({ username: req.body.username })
     if (!users.length) next()
-    else next({ 'message': 'Username taken' })
+    else next({ status: 422, message: 'Username taken' })
   } catch (err) {
     next(err) // need to have custom build middleware there or otherwise express will send to a default location
   }
@@ -41,7 +41,13 @@ const checkUsernameFree = async (req, res, next) => {
   }
 */
 const checkUsernameExists = async (req, res, next) => {
-  next()
+  try {
+    const users = await User.findBy({ username: req.body.username })
+    if (!users.length) next({ status: 401, message: 'Invalid credentials' })
+    else next()
+  } catch (err) {
+    next(err)
+  }
 }
 
 /*
