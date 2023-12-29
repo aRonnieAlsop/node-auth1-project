@@ -50,7 +50,7 @@ const checkUsernameExists = async (req, res, next) => {
       req.user = users[0]
       next()
     } else {
-      next({ status: 401, message: 'Invaldi credentials' })
+      next({ status: 401, message: 'Invalid credentials' })
     }
   } catch (err) {
     next(err)
